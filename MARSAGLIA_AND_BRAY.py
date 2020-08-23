@@ -11,7 +11,7 @@ class marsaglia_bray:
         self.samplesize = value
 
     def SampleRandomVariables(self):
-        for i in range(10000):
+        for i in range(self.samplesize):
 
             prob = random.random()
 
