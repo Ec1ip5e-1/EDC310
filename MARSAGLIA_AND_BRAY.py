@@ -94,12 +94,12 @@ class marsaglia_bray:
 
 
 
-test = marsaglia_bray(10000)
-test.SampleRandomVariables()
-print(test.getMean())
-print(test.getStandardDeviation())
-print(test.getStandardDeviation()**2)
-test.printPDF()
+# test = marsaglia_bray(10000)
+# test.SampleRandomVariables()
+# print(test.getMean())
+# print(test.getStandardDeviation())
+# print(test.getStandardDeviation()**2)
+# test.printPDF()
 
 
 
