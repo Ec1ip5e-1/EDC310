@@ -72,7 +72,7 @@ class marsaglia_bray:
                     x = v1 * ((9 - 2 * math.log(v1 ** 2 + v2 ** 2)) / (v1 ** 2 + v2 ** 2)) ** 0.5
                     y = v2 * ((9 - 2 * math.log(v1 ** 2 + v2 ** 2)) / (v1 ** 2 + v2 ** 2)) ** 0.5
 
-                    if (x > 3 or y > 3):
+                    if (abs(x) > 3 or abs(y) > 3):
                         if (x > 3):
                             X = x
                         else:
