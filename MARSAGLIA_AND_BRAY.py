@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import statistics
 import Q1_Wichmann_Hill
+import time
 
 WH = Q1_Wichmann_Hill.Uniform()
 
@@ -12,6 +13,7 @@ class marsaglia_bray:
     def __init__(self, value):
         self.samples = []
         self.samplesize = value
+        self.start_time = time.time()
 
     def SampleRandomVariables(self):
         for i in range(self.samplesize):
@@ -85,18 +87,10 @@ class marsaglia_bray:
         self.samplesize = value
 
     def printPDF(self):
-        bins = np.linspace(-5, 5, 30)
-        histogram, bins = np.histogram(self.samples, bins=bins, density=True)
-
-        bin_centers = 0.5 * (bins[1:] + bins[:-1])
-
-        pdf = stats.norm.pdf(bin_centers)
-
-        plt.figure(figsize=(6, 4))
-        plt.plot(bin_centers, histogram, label="Histogram of samples")
-        plt.plot(bin_centers, pdf, label="PDF")
-        plt.legend()
+        plt.hist(self.samples, bins=50, density=True, edgecolor='black', linewidth=1)
         plt.show()
+
+        print("--- %s seconds ---" % (time.time() - self.start_time))
 
     def getMean(self):
         return statistics.mean(self.samples)
@@ -106,7 +100,7 @@ class marsaglia_bray:
 
 
 
-test = marsaglia_bray(100000)
+test = marsaglia_bray(1000000)
 test.SampleRandomVariables()
 print(test.getMean())
 print(test.getStandardDeviation())
