@@ -4,6 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 import statistics
+import Q1_Wichmann_Hill
+
+WH = Q1_Wichmann_Hill.Uniform()
 
 class marsaglia_bray:
     def __init__(self, value):
@@ -13,29 +16,34 @@ class marsaglia_bray:
     def SampleRandomVariables(self):
         for i in range(self.samplesize):
 
-            prob = random.random()
 
-            u1 = random.uniform(0, 1)
-            u2 = random.uniform(0, 1)
-            u3 = random.uniform(0, 1)
+            prob = WH.Generate()
 
-            print("Random float number is ", prob)
-            print("Random float number is ", u1)
-            print("Random float number is ", u2)
-            print("Random float number is ", u3)
+            # u1 = random.uniform(0, 1)
+            # u2 = random.uniform(0, 1)
+            # u3 = random.uniform(0, 1)
+
+            u1 = WH.Generate()
+            u2 = WH.Generate()
+            u3 = WH.Generate()
+
+            # print("Random float number is ", prob)
+            # print("Random float number is ", u1)
+            # print("Random float number is ", u2)
+            # print("Random float number is ", u3)
 
             def g(temp):
                 if (abs(temp) < 1.0):
                     return 17.49731196 * math.exp(-0.5 * pow(temp, 2)) - 4.73570326 * (
                                 3 - pow(temp, 2)) - 2.15787544 * (
                                    1.5 - abs(temp))
-                if (abs(temp) < 1.0 and abs(temp) < 1.5):
+                elif (abs(temp) < 1.0 and abs(temp) < 1.5):
                     return 17.49731196 * math.exp(-0.5 * pow(temp, 2)) - 4.73570326 * (
                                 3 - pow(temp, 2)) - 2.15787544 * (
                                    1.5 - abs(temp))
-                if (abs(temp) < 1.5 and abs(temp) < 3.0):
+                elif (abs(temp) < 1.5 and abs(temp) < 3.0):
                     return 17.49731196 * math.exp(-0.5 * pow(temp, 2)) - 4.73570326 * (3 - pow(temp, 2))
-                if (abs(temp) < 3.0):
+                elif (abs(temp) <= 3.0):
                     return 0
 
             if (prob < 0.8638):
@@ -48,12 +56,16 @@ class marsaglia_bray:
                     y = 0.358 * u2
                     if (y < g(x)):
                         break
-                    u1 = random.uniform(0, 1)
-                    u2 = random.uniform(0, 1)
+                    # u1 = random.uniform(0, 1)
+                    # u2 = random.uniform(0, 1)
+                    u1 = WH.Generate()
+                    u2 = WH.Generate()
             elif (prob < 1):
                 while True:
-                    v1 = random.uniform(-1, 1)
-                    v2 = random.uniform(-1, 1)
+                    # v1 = random.uniform(-1, 1)
+                    # v2 = random.uniform(-1, 1)
+                    v1 = WH.UniformRange()
+                    v2 = WH.UniformRange()
 
                     x = v1 * ((9 - 2 * math.log(v1 ** 2 + v2 ** 2)) / (v1 ** 2 + v2 ** 2)) ** 0.5
                     y = v2 * ((9 - 2 * math.log(v1 ** 2 + v2 ** 2)) / (v1 ** 2 + v2 ** 2)) ** 0.5
@@ -94,12 +106,12 @@ class marsaglia_bray:
 
 
 
-# test = marsaglia_bray(10000)
-# test.SampleRandomVariables()
-# print(test.getMean())
-# print(test.getStandardDeviation())
-# print(test.getStandardDeviation()**2)
-# test.printPDF()
+test = marsaglia_bray(100000)
+test.SampleRandomVariables()
+print(test.getMean())
+print(test.getStandardDeviation())
+print(test.getStandardDeviation()**2)
+test.printPDF()
 
 
 
